@@ -8,8 +8,16 @@ import appConfig from './config/app.config';
 import * as Joi from '@hapi/joi';
 import { APP_PIPE } from '@nestjs/core';
 import { CommonModule } from './common/common.module';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { join } from 'path';
+import { PetsModule } from './pets/pets.module';
 @Module({
   imports: [
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+    }),
     TypeOrmModule.forRootAsync({
       useFactory: () => ({
         type: 'postgres',
@@ -32,7 +40,8 @@ import { CommonModule } from './common/common.module';
     CoffeesModule,
     CoffeeRatingModule,
     DatabaseModule,
-    CommonModule,
+    // CommonModule,
+    PetsModule,
   ],
   providers: [
     {
