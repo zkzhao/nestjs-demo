@@ -16,7 +16,7 @@ import { PetsService } from './pets.service';
 export class PetsResolver {
   constructor(private petsService: PetsService) {}
 
-  @Query((i) => Pet)
+  @Query((i) => Pet, { name: 'pet' })
   getPet(@Args('id', { type: () => Int }) id: number): Promise<Pet> {
     return this.petsService.findOne(id);
   }

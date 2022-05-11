@@ -17,7 +17,7 @@ type Pet {
 }
 
 type Query {
-  getPet(id: Int!): Pet!
+  pet(id: Int!): Pet!
   pets: [Pet!]!
   owners: [Owner!]!
   owner(id: Int!): Owner!
